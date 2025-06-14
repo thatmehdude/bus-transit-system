@@ -28,7 +28,7 @@ type RouteContextType = {
 
 const RouteContext = createContext<RouteContextType | undefined>(undefined);
 
-export const useRoute = () => {
+export const useRouteContext = () => {
     const context = useContext(RouteContext);
     if (context === undefined) {
         throw new Error("useRoute must be within a Route provider");
