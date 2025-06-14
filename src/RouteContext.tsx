@@ -1,11 +1,12 @@
 import { useContext, createContext, useState, type ReactNode } from "react";
+import { mockRoutes } from "./mockData";
 
 
 type Route = {
     id: string;
     name: string;
     schedule: string[];
-    status: 'on-time' | 'delayed' | 'cancelled';
+    status: "on-time" | "delayed" | "cancelled";
 }
 
 type Alert = {
@@ -21,6 +22,8 @@ type RouteContextType = {
     toggleFavorite: (routeId: string) => void;
     refreshArrivalTimes: () => void;
     addAlert: (message: string, severity: 'warning' | 'critical') => void;
+    searchQuery: string;
+    setSearchQuery: (query: string) => void;
 }
 
 const RouteContext = createContext<RouteContextType | undefined>(undefined);
@@ -38,22 +41,10 @@ type RouteProviderProps = {
 }
 
 export const RouteProvider: React.FC<RouteProviderProps> = ({children}) => {
-    const [routes, setRoutes] = useState<Route[]>([
-        {
-            id: "blue-line",
-            name: "Blue Line Subway",
-            schedule: ["08:15", "08:30", "08:45"],
-            status: "on-time"
-        },
-        {
-            id: "bus-101",
-            name: "Bus 101 Downtown",
-            schedule: ["08:20", "08:35", "08:50"],
-            status: "delayed"
-        }
-    ]);
+    const [routes, setRoutes] = useState<Route[]>(mockRoutes);
     const [favourites, setFavourites] = useState<string[]>([]);
     const [alerts, setAlerts] = useState<Alert[]>([]);
+    const [searchQuery, setSearchQuery] = useState("");
 
     const toggleFavorite = (routeId: string) => {
         setFavourites((prev) =>
@@ -90,6 +81,8 @@ export const RouteProvider: React.FC<RouteProviderProps> = ({children}) => {
       toggleFavorite,
       refreshArrivalTimes,
       addAlert,
+      searchQuery,
+      setSearchQuery,
     };
 
     return (
