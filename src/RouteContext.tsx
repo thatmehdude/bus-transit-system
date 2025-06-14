@@ -64,7 +64,14 @@ export const RouteProvider: React.FC<RouteProviderProps> = ({children}) => {
     };
 
     const refreshArrivalTimes = () => {
-        // Placeholder for refreshing logic
+        const updatedRoutes = routes.map((route) => ({
+            ...route,
+            schedule: route.schedule.map((_, i) => {
+                const hour = 6 + i * 2;
+                return `${hour.toString().padStart(2, "0")}:00`;
+            }),
+        }));
+        setRoutes(updatedRoutes);
     };
 
     const addAlert = (message: string, severity: "warning" | "critical") => {
@@ -76,18 +83,16 @@ export const RouteProvider: React.FC<RouteProviderProps> = ({children}) => {
       setAlerts((prev) => [...prev, newAlert]);
     };
 
+    const value = {
+      routes,
+      favourites,
+      alerts,
+      toggleFavorite,
+      refreshArrivalTimes,
+      addAlert,
+    };
+
     return (
-        <RouteContext.Provider
-            value={{
-                routes,
-                favourites,
-                alerts,
-                toggleFavorite,
-                refreshArrivalTimes,
-                addAlert
-            }}
-        >
-            {children}
-        </RouteContext.Provider>
+      <RouteContext.Provider value={value}>{children}</RouteContext.Provider>
     );
 }
