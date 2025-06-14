@@ -20,7 +20,7 @@ const HomePage = () => {
   return (
     <div className="page-container">
       <div className="page-header">
-        <h2>Route Browser</h2>
+        <h2>Lagos transit network</h2>
         <button onClick={refreshArrivalTimes} className="refresh-btn">
           Refresh Times
         </button>
