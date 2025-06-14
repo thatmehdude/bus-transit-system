@@ -42,3 +42,49 @@ export const mockRoutes = [
     status: "on-time" as "on-time",
   },
 ];
+
+export const mockStops = [
+  {
+    id: "central-station",
+    name: "Central Station",
+    routes: ["blue-line", "r1", "r2"],
+  },
+  {
+    id: "downtown-plaza",
+    name: "Downtown Plaza",
+    routes: ["bus-101", "r3"],
+  },
+  {
+    id: "university-campus",
+    name: "University Campus",
+    routes: ["r2", "r3", "r4"],
+  },
+  {
+    id: "airport-terminal",
+    name: "Airport Terminal",
+    routes: ["r1", "r5"],
+  },
+  {
+    id: "shopping-center",
+    name: "Shopping Center",
+    routes: ["bus-101", "r4", "r5"],
+  },
+  {
+    id: "metro-north",
+    name: "Metro North Station",
+    routes: ["blue-line", "r2", "r3"],
+  },
+];
+
+export const mockAlerts = [
+  {
+    id: "1",
+    message: "Blue Line experiencing 10-minute delays due to signal issues",
+    severity: "warning" as "warning",
+  },
+  {
+    id: "2",
+    message: "Yellow Loop service cancelled until further notice",
+    severity: "critical" as "critical",
+  },
+];

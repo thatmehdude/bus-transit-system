@@ -1,5 +1,5 @@
 import { useContext, createContext, useState, type ReactNode } from "react";
-import { mockRoutes } from "./mockData";
+import { mockAlerts, mockRoutes, mockStops } from "./mockData";
 
 
 type Route = {
@@ -15,15 +15,23 @@ type Alert = {
     severity: 'warning' | 'critical';
 }
 
+type Stop = {
+    id: string;
+    name: string;
+    routes: string[];
+}
+
 type RouteContextType = {
     routes: Route[];
     favourites: string[];
     alerts: Alert[];
+    stops: Stop[];
     toggleFavorite: (routeId: string) => void;
     refreshArrivalTimes: () => void;
     addAlert: (message: string, severity: 'warning' | 'critical') => void;
     searchQuery: string;
     setSearchQuery: (query: string) => void;
+    getNextArrival: (schedule: string[]) => string;
 }
 
 const RouteContext = createContext<RouteContextType | undefined>(undefined);
@@ -43,8 +51,9 @@ type RouteProviderProps = {
 export const RouteProvider: React.FC<RouteProviderProps> = ({children}) => {
     const [routes, setRoutes] = useState<Route[]>(mockRoutes);
     const [favourites, setFavourites] = useState<string[]>([]);
-    const [alerts, setAlerts] = useState<Alert[]>([]);
+    const [alerts, setAlerts] = useState<Alert[]>(mockAlerts);
     const [searchQuery, setSearchQuery] = useState("");
+    const [stops] = useState<Stop[]>(mockStops);
 
     const toggleFavorite = (routeId: string) => {
         setFavourites((prev) =>
@@ -55,11 +64,15 @@ export const RouteProvider: React.FC<RouteProviderProps> = ({children}) => {
     };
 
     const refreshArrivalTimes = () => {
+        const now = new Date();
+        const currentHour = now.getHours();
+
         const updatedRoutes = routes.map((route) => ({
             ...route,
             schedule: route.schedule.map((_, i) => {
-                const hour = 6 + i * 2;
-                return `${hour.toString().padStart(2, "0")}:00`;
+                const hour = Math.max(currentHour, 6 + i * 2);
+                const minute = Math.floor(Math.random() * 60);
+                return `${hour.toString().padStart(2, "0")}:${minute.toString().padStart(2, "0")}`;
             }),
         }));
         setRoutes(updatedRoutes);
@@ -74,15 +87,31 @@ export const RouteProvider: React.FC<RouteProviderProps> = ({children}) => {
       setAlerts((prev) => [...prev, newAlert]);
     };
 
+    const getNextArrival = (schedule: string[]): string => {
+        const now = new Date();
+        const currentTime = now.getHours() * 60 + now.getMinutes();
+
+        for (const time of schedule) {
+            const [hours, minutes] = time.split(":").map(Number);
+            const scheduleTime = hours * 60 + minutes;
+            if (scheduleTime > currentTime) {
+                return time;
+            }
+        }
+        return schedule[0] || 'no more arrivals today';
+    }
+
     const value = {
       routes,
       favourites,
       alerts,
+      stops,
       toggleFavorite,
       refreshArrivalTimes,
       addAlert,
       searchQuery,
       setSearchQuery,
+      getNextArrival,
     };
 
     return (
