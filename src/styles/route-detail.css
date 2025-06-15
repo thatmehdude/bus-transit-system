@@ -1,0 +1,111 @@
+/* Route Detail Page Specific Styles */
+
+.route-detail {
+  background-color: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.route-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.back-link {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.favorite-btn.large {
+  padding: 0.75rem 1.5rem;
+  background-color: #ecf0f1;
+  color: #2c3e50;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.favorite-btn.large.favorited {
+  background-color: #f1c40f;
+  color: white;
+}
+
+.favorite-btn.large:hover {
+  background-color: #f39c12;
+  color: white;
+}
+
+.route-title {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.status-indicator.large {
+  font-size: 1.1rem;
+  padding: 0.75rem 1.5rem;
+  margin-bottom: 2rem;
+  display: inline-block;
+}
+
+.schedule-section {
+  margin-bottom: 2rem;
+}
+
+.schedule-section h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem;
+}
+
+.schedule-time {
+  background-color: #3498db;
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.service-notice {
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.service-notice.warning {
+  background-color: #fff3cd;
+  border-left: 4px solid #f39c12;
+}
+
+.service-notice.critical {
+  background-color: #f8d7da;
+  border-left: 4px solid #e74c3c;
+}
+
+.service-notice h4 {
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.service-notice p {
+  color: #34495e;
+  line-height: 1.6;
+}

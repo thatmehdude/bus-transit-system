@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useRouteContext } from "../RouteContext";
+import "../styles/homepage.css"
 
 const HomePage = () => {
   const { routes, toggleFavorite, favourites, searchQuery, refreshArrivalTimes } = useRouteContext();

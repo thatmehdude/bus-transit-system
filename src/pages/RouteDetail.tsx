@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useRouteContext } from "../RouteContext";
+import "../styles/route-detail.css"
 
 const RouteDetailPage = () => {
   const { routes, favourites, toggleFavorite } = useRouteContext();

@@ -1,0 +1,84 @@
+.stops-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.stops-list h3, .arrivals-section h3 {
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.stop-item {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+.stop-item:hover {
+  background-color: #f8f9fa;
+}
+
+.stop-item.selected {
+  border-color: #3498db;
+  background-color: #ebf3fd;
+}
+
+.stop-name {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.routes-served {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.arrivals-list {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.arrival-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.arrival-item:last-child {
+  border-bottom: none;
+}
+
+.arrival-time {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #2c3e50;
+}
+
+.arrival-route {
+  flex: 1;
+  margin-left: 1rem;
+  color: #34495e;
+}
+
+.arrival-status {
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+
+@media (max-width: 768px) {
+  .stops-section {
+    grid-template-columns: 1fr;
+  }
+}

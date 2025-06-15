@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useRouteContext } from "../RouteContext";
+import "../styles/favorites.css"
 
 const FavoritesPage = () => {
   const { favourites, routes, toggleFavorite, getNextArrival } = useRouteContext();

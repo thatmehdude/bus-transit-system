@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouteContext } from "../RouteContext";
+import "../styles/alerts.css"
 
 const AlertsPage = () => {
   const { alerts, addAlert } = useRouteContext();

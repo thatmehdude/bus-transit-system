@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouteContext } from "../RouteContext";
+import "../styles/stop-lookup.css"
 
 const StopLookupPage = () => {
   const { stops, routes } = useRouteContext();
