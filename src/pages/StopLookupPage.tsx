@@ -6,6 +6,7 @@ const StopLookupPage = () => {
   const { stops, routes } = useRouteContext();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStop, setSelectedStop] = useState<string | null>(null);
+  const [showAllStops, setShowAllStops] = useState(false);
 
   const filteredStops = stops.filter((stop) =>
     stop.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -57,30 +58,61 @@ const StopLookupPage = () => {
     }
   };
 
+  const handleViewAllStops = () => {
+    setShowAllStops(!showAllStops);
+    setSearchQuery("");
+  };
+
+  
+  const stopsToShow = showAllStops ? stops : filteredStops;
+  const shouldShowStops = showAllStops || searchQuery;
+
   return (
     <div className="page-container">
-      <h2>Stop Lookup</h2>
+      <div className="page-header">
+        <h2>Stop Lookup</h2>
+        <button 
+          onClick={handleViewAllStops}
+          className={`view-all-btn ${showAllStops ? 'active' : ''}`}
+        >
+          {showAllStops ? 'Hide All Stops' : 'View All Stops'}
+        </button>
+      </div>
 
       <div className="search-container">
         <input
           type="text"
           placeholder="Search for a stop..."
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+            setShowAllStops(false);
+          }}
           className="search-input large"
+          disabled={showAllStops}
         />
       </div>
 
       <div className="stops-section">
-        {searchQuery && (
+        {shouldShowStops && (
           <div className="stops-list">
-            <h3>Matching Stops:</h3>
-            {filteredStops.length === 0 ? (
+            <h3>
+              {showAllStops 
+                ? `All Stops (${stops.length})` 
+                : searchQuery 
+                  ? 'Matching Stops:' 
+                  : 'Stops:'
+              }
+            </h3>
+            {stopsToShow.length === 0 ? (
               <p className="no-results">
-                No stops found matching "{searchQuery}"
+                {showAllStops 
+                  ? "No stops available" 
+                  : `No stops found matching "${searchQuery}"`
+                }
               </p>
             ) : (
-              filteredStops.map((stop) => (
+              stopsToShow.map((stop) => (
                 <div
                   key={stop.id}
                   className={`stop-item ${
